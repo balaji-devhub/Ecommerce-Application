@@ -3,7 +3,7 @@ import Admin from '../Model/AdminModel.js'
 import bcrypt from 'bcryptjs'
 const router = express.Router()
 
-// login User
+// login Admin
 router.post('/login/', async (req, res) => {
   try {
     const { email, password } = req.body
@@ -34,7 +34,7 @@ router.post('/login/', async (req, res) => {
   }
 })
 
-// add new user
+// add new Admin
 router.post('/new/', async (req, res) => {
   try {
     const { adminName, email, shopName, location, password } = req.body

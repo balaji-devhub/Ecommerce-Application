@@ -4,30 +4,31 @@ const productSchema = new mongoose.Schema(
   {
     productName: {
       type: String,
-      required: true,
+      required: [true, 'Enter the Product Name'],
       trim: true
     },
-
     price: {
       type: Number,
-      required: true,
       default: 0
     },
-
     description: {
       type: String,
-      required: true
+      required: [true, 'Enter the Product description ']
     },
-
     image: {
       type: String,
-      required: true
+      required: [true, 'Upload the image']
     },
 
     stock: {
       type: Number,
-      required: true,
+      required: [true, 'Enter the Minmun 1 quantity'],
       min: 1
+    },
+    adminId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Admin',
+      required: true
     }
   },
   { timestamps: true }
