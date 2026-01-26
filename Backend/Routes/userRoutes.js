@@ -24,7 +24,7 @@ router.post('/login/', async (request, response) => {
     }
 
     response.status(200).json({
-      message: 'User login successful'
+      message: 'User login successfully'
     })
   } catch (error) {
     response.status(500).json({
