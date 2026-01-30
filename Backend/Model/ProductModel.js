@@ -15,7 +15,7 @@ const productSchema = new mongoose.Schema(
       type: String,
       required: [true, 'Enter the Product description ']
     },
-    image: [
+    images: [
       {
         image: {
           type: String,
@@ -32,6 +32,10 @@ const productSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Admin',
       required: true
+    },
+    category: {
+      type: String,
+      required: [true, 'Enter the Category of Product']
     }
   },
   { timestamps: true }

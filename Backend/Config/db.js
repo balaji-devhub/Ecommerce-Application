@@ -8,6 +8,7 @@ const DbConnection = async () => {
   } catch (error) {
     console.log(error.message)
     response.send(error.message)
+    process.exit(1)
   }
 }
 
