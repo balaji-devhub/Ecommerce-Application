@@ -35,7 +35,13 @@ const AdminSchema = mongoose.Schema(
     role: {
       type: String,
       default: 'Admin'
-    }
+    },
+    adminProducts: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Product'
+      }
+    ]
   },
   {
     timestamps: true

@@ -15,11 +15,14 @@ const productSchema = new mongoose.Schema(
       type: String,
       required: [true, 'Enter the Product description ']
     },
-    image: {
-      type: String,
-      required: [true, 'Upload the image']
-    },
-
+    image: [
+      {
+        image: {
+          type: String,
+          required: [true, 'Upload the link']
+        }
+      }
+    ],
     stock: {
       type: Number,
       required: [true, 'Enter the Minmun 1 quantity'],

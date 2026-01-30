@@ -3,6 +3,9 @@ import Admin from '../Model/AdminModel.js'
 import bcrypt from 'bcryptjs'
 const router = express.Router()
 
+// importing model
+import Product from '../Model/ProductModel.js'
+
 // login Admin
 router.post('/login/', async (req, res) => {
   try {
@@ -24,7 +27,8 @@ router.post('/login/', async (req, res) => {
     }
 
     res.status(200).json({
-      message: 'Admin login successful'
+      message: 'Admin login successful',
+      adminEmail: email
     })
   } catch (error) {
     res.status(500).json({
@@ -37,7 +41,7 @@ router.post('/login/', async (req, res) => {
 // add new Admin
 router.post('/new/', async (req, res) => {
   try {
-    const { adminName, email, shopName, location, password } = req.body
+    const { adminName, email, shopName, location, password, adminProducts } = req.body
 
     const existingAdmin = await Admin.findOne({ email })
     if (existingAdmin) {
@@ -59,7 +63,8 @@ router.post('/new/', async (req, res) => {
     res.status(201).json({
       message: 'Admin created successfully',
       adminName,
-      adminEmail: email
+      adminEmail: email,
+      adminProduct: adminProducts
     })
   } catch (error) {
     res.status(500).json({
