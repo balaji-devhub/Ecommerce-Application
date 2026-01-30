@@ -1,6 +1,8 @@
 import express from 'express'
 import Admin from '../Model/AdminModel.js'
 import bcrypt from 'bcryptjs'
+import jwt from 'jsonwebtoken'
+
 const router = express.Router()
 
 // importing model
@@ -9,7 +11,7 @@ import Product from '../Model/ProductModel.js'
 // login Admin
 router.post('/login/', async (req, res) => {
   try {
-    const { email, password } = req.body
+    const { email, password, role } = req.body
 
     const existingAdmin = await Admin.findOne({ email })
     if (!existingAdmin) {
@@ -26,9 +28,17 @@ router.post('/login/', async (req, res) => {
       })
     }
 
+    const payload = {
+      email: existingAdmin.email,
+      role: existingAdmin.role,
+      adminId: existingAdmin._id
+    }
+    const jwt_token = await jwt.sign(payload, process.env.JWT_TOKEN)
+
     res.status(200).json({
       message: 'Admin login successful',
-      adminEmail: email
+      adminEmail: email,
+      jwt_token
     })
   } catch (error) {
     res.status(500).json({

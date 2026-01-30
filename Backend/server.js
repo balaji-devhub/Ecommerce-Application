@@ -6,11 +6,11 @@ import UserRoute from './Routes/userRoutes.js'
 import AdminRoute from './Routes/AdminRoute.js'
 
 const app = express()
+app.use(express.json())
 dotenv.config()
 
 // cors gate backend ---> frontend
 app.use(cors())
-app.use(express.json())
 
 // mongodb initialize
 dbConnection()
