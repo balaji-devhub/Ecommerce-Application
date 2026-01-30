@@ -1,6 +1,9 @@
 import express from 'express'
 import User from '../Model/UserModel.js'
 import bcrypt from 'bcryptjs'
+import jwt from 'jsonwebtoken'
+import dotenv from 'dotenv'
+dotenv.config()
 const router = express.Router()
 
 // login User
@@ -23,8 +26,17 @@ router.post('/login/', async (request, response) => {
       })
     }
 
+    const userPayload = {
+      userId: existingUser._id,
+      email
+    }
+
+    //generate token
+    const jwt_token = jwt.sign(userPayload, process.env.JWT_TOKEN)
+
     response.status(200).json({
-      message: 'User login successfully'
+      message: 'User login successfully',
+      jwt_token
     })
   } catch (error) {
     response.status(500).json({
