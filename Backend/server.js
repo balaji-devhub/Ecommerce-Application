@@ -4,6 +4,7 @@ import cors from 'cors'
 import dbConnection from './Config/db.js'
 import UserRoute from './Routes/userRoutes.js'
 import AdminRoute from './Routes/AdminRoute.js'
+import CartRoute from './Routes/CartRoute.js'
 
 const app = express()
 app.use(express.json())
@@ -16,7 +17,7 @@ app.use(cors())
 dbConnection()
 
 // route middleware
-app.use('/user/', UserRoute)
+app.use('/user/', UserRoute, CartRoute)
 app.use('/admin/', AdminRoute)
 
 // server initialization
